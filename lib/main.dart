@@ -31,7 +31,7 @@ void main([List<String>? args]) => runZonedGuarded<void>(
 
     final outputFile = io.File(
       '${inputFile.path.replaceAll(RegExp(r'\.[^.]+$'), '')}'
-      '.resized.png',
+      '.resized.rgba',
     );
 
     final inputBytes = inputFile.readAsBytesSync();
