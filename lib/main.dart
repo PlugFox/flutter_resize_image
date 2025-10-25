@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:resize/src/binding.dart';
-import 'package:resize/src/resize_image_flutter.dart';
+import 'package:resize/src/resize_image.dart';
 import 'package:resize/src/utils.dart';
 
 final $log = io.stdout.writeln;
@@ -44,7 +44,11 @@ void main([List<String>? args]) => runZonedGuarded<void>(
     const scale = 2.0;
 
     final stopwatch = Stopwatch()..start();
-    final outputBytes = await resizeImage$Flutter(inputBytes, scale);
+    //final outputBytes = await resizeImage$Flutter(inputBytes, scale);
+    final outputBytes = await resizeImage$RawRgba(
+      inputBytes,
+      scale,
+    ).then((result) => result.bytes);
     stopwatch.stop();
     $log('Resized in ${stopwatch.elapsedMilliseconds} ms');
 
