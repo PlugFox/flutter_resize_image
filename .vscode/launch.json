@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "env": {
+                "CONFIG_IMAGE_PATH": "logo.png"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "name": "Run (release)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart",
+            "env": {
+                "CONFIG_IMAGE_PATH": "logo.png"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": []
+        }
+    ]
+}
