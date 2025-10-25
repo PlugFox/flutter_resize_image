@@ -56,8 +56,8 @@ Future<Uint8List> resizeImage$Flutter(Uint8List bytes, double scale) async {
 
     canvas.drawImageRect(
       src,
-      ui.Rect.fromLTWH(0, 0, src$width.toDouble(), src$height.toDouble()),
-      ui.Rect.fromLTWH(0, 0, dst$width.toDouble(), dst$height.toDouble()),
+      ui.Rect.fromLTRB(0, 0, src$width.toDouble(), src$height.toDouble()),
+      ui.Rect.fromLTRB(0, 0, dst$width.toDouble(), dst$height.toDouble()),
       paint,
     );
 
