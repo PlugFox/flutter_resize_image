@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:resize/src/binding.dart';
-import 'package:resize/src/png_encoder_gdiplus.dart';
+import 'package:resize/src/png_encoder_gdi.dart';
 import 'package:resize/src/resize_image.dart';
 import 'package:resize/src/utils.dart';
 
@@ -32,7 +32,7 @@ void main([List<String>? args]) => runZonedGuarded<void>(
 
     final outputFile = io.File(
       '${inputFile.path.replaceAll(RegExp(r'\.[^.]+$'), '')}'
-      '.resized.rgba',
+      '.resized.png',
     );
 
     final inputBytes = inputFile.readAsBytesSync();
@@ -45,12 +45,16 @@ void main([List<String>? args]) => runZonedGuarded<void>(
     const scale = 2.0;
 
     final stopwatch = Stopwatch()..start();
-    //final outputBytes = await resizeImage$Flutter(inputBytes, scale);
     final output = await resizeImage$RawRgba(inputBytes, scale);
-    $log('Resized in ${stopwatch.elapsedMilliseconds} ms');
+    final resizeTime = stopwatch.elapsedMilliseconds;
+    $log('Resized in $resizeTime ms');
+
     stopwatch.reset();
-    final bytes = encodePngWic(output.bytes, output.width, output.height);
+    stopwatch.start();
+    final bytes = encodePngGdi(output.bytes, output.width, output.height);
+    stopwatch.stop();
     $log('Encoded PNG in ${stopwatch.elapsedMilliseconds} ms');
+
     outputFile.writeAsBytesSync(bytes);
 
     $log(
