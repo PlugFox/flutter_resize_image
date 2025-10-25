@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  ffi: ^2.1.4
+  win32: ^5.15.0
 
 dev_dependencies:
   flutter_test:

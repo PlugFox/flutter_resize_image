@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:resize/src/binding.dart';
+import 'package:resize/src/png_encoder_gdiplus.dart';
 import 'package:resize/src/resize_image.dart';
 import 'package:resize/src/utils.dart';
 
@@ -45,25 +46,23 @@ void main([List<String>? args]) => runZonedGuarded<void>(
 
     final stopwatch = Stopwatch()..start();
     //final outputBytes = await resizeImage$Flutter(inputBytes, scale);
-    final outputBytes = await resizeImage$RawRgba(
-      inputBytes,
-      scale,
-    ).then((result) => result.bytes);
-    stopwatch.stop();
+    final output = await resizeImage$RawRgba(inputBytes, scale);
     $log('Resized in ${stopwatch.elapsedMilliseconds} ms');
-
-    outputFile.writeAsBytesSync(outputBytes);
+    stopwatch.reset();
+    final bytes = encodePngWic(output.bytes, output.width, output.height);
+    $log('Encoded PNG in ${stopwatch.elapsedMilliseconds} ms');
+    outputFile.writeAsBytesSync(bytes);
 
     $log(
       'Saved: '
       '${outputFile.path} '
-      '(${bytesToHumanReadableString(outputBytes.lengthInBytes)})',
+      '(${bytesToHumanReadableString(bytes.lengthInBytes)})',
     );
 
     io.exit(0);
   },
   (e, s) {
-    $err(e);
+    $err('Error: $e\nStack trace:\n$s');
     io.exit(1);
   },
 );
