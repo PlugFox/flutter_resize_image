@@ -52,7 +52,7 @@ Uint8List encodePngGdi(Uint8List rgbaBytes, int width, int height) {
       width,
       height,
       width * 4, // stride
-      PixelFormat32bppARGB,
+      _pixelFormat32bppARGB,
       bgraBytes,
       bitmap,
     );
@@ -205,4 +205,4 @@ final class GdiplusStartupInput extends Struct {
 }
 
 // Constants
-const PixelFormat32bppARGB = 0x26200A;
+const _pixelFormat32bppARGB = 0x26200A;
