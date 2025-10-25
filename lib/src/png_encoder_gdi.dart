@@ -8,11 +8,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 /// Optimized PNG encoder using GDI+
-/// Optimizations:
-/// 1. No debug logging (reduces overhead)
-/// 2. Direct file path instead of temp directory lookup
-/// 3. Reuses temp file path
-/// 4. Batch RGBA->BGRA conversion
 Uint8List encodePngGdi(Uint8List rgbaBytes, int width, int height) {
   if (!io.Platform.isWindows) {
     throw UnsupportedError('GDI+ encoder is only available on Windows');
