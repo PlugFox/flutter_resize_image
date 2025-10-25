@@ -8,7 +8,7 @@
             "flutterMode": "debug",
             "program": "lib/main.dart",
             "env": {
-                "CONFIG_IMAGE_PATH": "logo.png"
+                "CONFIG_IMAGE_PATH": "example.png"
             },
             "cwd": "${workspaceFolder}",
             "args": []
@@ -20,7 +20,7 @@
             "flutterMode": "release",
             "program": "lib/main.dart",
             "env": {
-                "CONFIG_IMAGE_PATH": "logo.png"
+                "CONFIG_IMAGE_PATH": "example.png"
             },
             "cwd": "${workspaceFolder}",
             "args": []
